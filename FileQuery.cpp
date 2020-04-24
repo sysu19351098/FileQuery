@@ -175,8 +175,12 @@ void FileQuery::ReplaceWord(const std::string &oldword, const std::string &newwo
 
     ofstream outfile(filename_);//以可写模式打开一个文件，并清空内容
     if(outfile.is_open())
-    {outfile << text_;//将替换好的文本输入到原文件中
-    outfile.close();}
+    {
+        outfile << text_;//将替换好的文本输入到原文件中
+        outfile.close();
+        FileQuery new_f(filename_);
+        *this=new_f;//更新整个类的数据成员
+    }
     else{
         cout<<"The "<<filename_<<" is fail to open."<<endl;
     }
